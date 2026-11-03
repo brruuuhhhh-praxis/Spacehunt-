@@ -44,7 +44,7 @@ function StudentsBrand() {
   );
 }
 
-export default function StudentsPage({ session, profile, onProfileUpdated, onLogout }) {
+export default function StudentsPage({ session, profile, onProfileUpdated, onLogout, accountControls }) {
   const userId = session?.user?.id;
   const [tab, setTab] = useState('feed');
   const [posts, setPosts] = useState([]);
@@ -411,7 +411,7 @@ export default function StudentsPage({ session, profile, onProfileUpdated, onLog
         <div className="st-header__center"><span className="st-kicker">STUDENT NETWORK</span><strong>Students</strong></div>
         <div className="st-header__right">
           <span className="st-city-pill">⌖ {city}</span>
-          <button className="st-logout" type="button" onClick={onLogout}>Log out</button>
+          {accountControls}
         </div>
       </header>
 

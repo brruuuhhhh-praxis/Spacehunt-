@@ -27,7 +27,7 @@ function categoryFromPath() {
   return "libraries";
 }
 
-export default function ListingPage({ category: categoryProp }) {
+export default function ListingPage({ category: categoryProp, accountControls }) {
   const category = categoryProp || categoryFromPath();
   const meta = config[category] || config.libraries;
   const [city, setCity] = useState(() => {
@@ -208,7 +208,7 @@ export default function ListingPage({ category: categoryProp }) {
       <div className="listing-backdrop" aria-hidden="true" />
       <header className="listing-header">
         <a className="listing-brand" href="/"><span>♧</span> SPACE<b>HUNT</b></a>
-        <nav><a href="/">Home</a><a href="/explore">Explore Spaces</a></nav>
+        <nav><a href="/">Home</a><a href="/explore">Explore Spaces</a>{accountControls}</nav>
       </header>
 
       <section className="listing-hero">

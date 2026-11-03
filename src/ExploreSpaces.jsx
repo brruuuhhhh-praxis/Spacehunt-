@@ -44,7 +44,7 @@ function Icon({ type }) {
   return <svg viewBox="0 0 64 54" aria-hidden="true"><path d="M5 17 32 5l27 12-27 12L5 17Z"/><path d="M15 23v13c10 8 24 8 34 0V23M59 17v19M55 41h8M32 29v9M28 38h8"/></svg>;
 }
 
-export default function ExploreSpaces({ session, onLogout, isStudent = false }) {
+export default function ExploreSpaces({ session, onLogout, isStudent = false, accountControls }) {
   let profileCity = "";
   try { profileCity = JSON.parse(localStorage.getItem("spacehunt_demo_session") || "null")?.city || ""; } catch { profileCity = ""; }
   return (
@@ -65,12 +65,7 @@ export default function ExploreSpaces({ session, onLogout, isStudent = false }) 
           {isStudent && <a className="student-nav-link" href="/students"><span className="nav-symbol">♙</span> Students</a>}
           <a href="/list-space"><span className="nav-symbol">▣</span> List Your Space</a>
           <a href="/saved"><span className="nav-symbol heart">♡</span> Saved</a>
-          <div className="sh-account-controls">
-            <span className="sh-account-name" title={session?.user?.email || ''}>
-              {session?.user?.user_metadata?.full_name || session?.user?.email?.split('@')[0] || 'Account'}
-            </span>
-            <button type="button" className="sh-account-logout" onClick={onLogout}>Log out</button>
-          </div>
+          {accountControls}
         </nav>
         <button className="mobile-menu" aria-label="Open menu" aria-expanded={typeof document !== 'undefined' && document.body.classList.contains('sh-menu-open')} onClick={() => document.body.classList.toggle("sh-menu-open")}>☰</button>
       </header>

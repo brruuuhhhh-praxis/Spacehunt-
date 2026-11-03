@@ -58,15 +58,19 @@ function BrandMark() {
   );
 }
 
-function AccountControls({ session, onLogout, floating = false }) {
+function AccountControls({ session, onLogout, displayNameOverride }) {
   const email = session?.user?.email || '';
   const displayName =
+    displayNameOverride ||
     session?.user?.user_metadata?.full_name ||
+    session?.user?.user_metadata?.name ||
     email.split('@')[0] ||
     'Account';
+  const initial = String(displayName).trim().charAt(0).toUpperCase() || 'U';
 
   return (
-    <div className={`account-controls ${floating ? 'account-controls--floating' : ''}`}>
+    <div className="account-controls" aria-label="User account controls">
+      <span className="account-controls__avatar" aria-hidden="true">{initial}</span>
       <span className="account-controls__name" title={email}>{displayName}</span>
       <button type="button" className="account-controls__logout" onClick={onLogout}>
         Log out
@@ -366,20 +370,20 @@ function Root() {
   }
 
   if (page === 'explore') {
-    return <ExploreSpaces session={session} onLogout={handleLogout} isStudent={loadedProfileUserId === session?.user?.id && userProfile?.role === 'Student'} />;
+    return <ExploreSpaces session={session} onLogout={handleLogout} isStudent={loadedProfileUserId === session?.user?.id && userProfile?.role === 'Student'}  accountControls={<AccountControls session={session} onLogout={handleLogout} />} />;
   }
   if (page === 'students') {
     if (profileLoading || loadedProfileUserId !== session?.user?.id) return <main className="st-page"><div className="st-empty-state">Loading student access…</div></main>;
     if (userProfile?.role !== 'Student') {
       return <main className="st-page st-page--setup"><header className="st-header"><a className="st-brand" href="/">SPACE<span>HUNT</span></a></header><section className="st-setup-card"><span className="st-kicker">STUDENT NETWORK</span><h1>Student access only.</h1><p>The SPACEHUNT Students network is available only to accounts registered as a Student.</p><a className="st-primary-button" href="/">Return to SPACEHUNT</a></section></main>;
     }
-    return <StudentsPage session={session} profile={userProfile} onProfileUpdated={setUserProfile} onLogout={handleLogout} />;
+    return <StudentsPage session={session} profile={userProfile} onProfileUpdated={setUserProfile} onLogout={handleLogout}  accountControls={<AccountControls session={session} onLogout={handleLogout} />} />;
   }
   if (window.location.pathname.replace(/\/+$/, '') === '/list-space') {
-    return <><AccountControls session={session} onLogout={handleLogout} floating /><OwnerPage /></>;
+    return <OwnerPage accountControls={<AccountControls session={session} onLogout={handleLogout} />} />;
   }
   if (page === 'category') {
-    return <><AccountControls session={session} onLogout={handleLogout} floating /><ListingPage /></>;
+    return <ListingPage accountControls={<AccountControls session={session} onLogout={handleLogout} />} />;
   }
   return <App onNavigate={navigate} session={session} onLogout={handleLogout} isStudent={loadedProfileUserId === session?.user?.id && userProfile?.role === 'Student'} />;
 }

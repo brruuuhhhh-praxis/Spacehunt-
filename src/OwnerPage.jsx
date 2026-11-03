@@ -109,7 +109,7 @@ function isGoogleMapsLink(value) {
   }
 }
 
-export default function OwnerPage() {
+export default function OwnerPage({ accountControls }) {
   const [activeCategory, setActiveCategory] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -258,6 +258,7 @@ export default function OwnerPage() {
         <a href="/" onClick={() => setMenuOpen(false)}>⌂ <span>Home</span></a>
         <a href="/explore" onClick={() => setMenuOpen(false)}>▦ <span>Explore Spaces</span></a>
         <a className="sp-owner-nav-cta" href="#sp-owner-categories" onClick={() => setMenuOpen(false)}><b>＋</b> List Your Space</a>
+        {accountControls}
       </nav>
     </header>
 

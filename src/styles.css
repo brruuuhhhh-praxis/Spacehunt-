@@ -330,16 +330,36 @@ h1 strong::after { content: ''; position: absolute; height: 4px; width: 38%; rig
   .trust-row { margin-top: 25px; }
 }
 
-/* SPACEHUNT account controls — navy and gold */
+/* Shared SPACEHUNT account controls — existing navy and gold theme */
 .account-controls {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 9px;
   flex-shrink: 0;
   margin-left: auto;
   position: relative;
   z-index: 5;
+  min-height: 42px;
+  padding: 5px 7px 5px 9px;
+  border: 1px solid rgba(213, 177, 105, .28);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(12, 29, 49, .96), rgba(7, 19, 35, .94));
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .18), inset 0 1px rgba(255, 255, 255, .04);
+  box-sizing: border-box;
+}
+
+.account-controls__avatar {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #071321;
+  background: linear-gradient(135deg, #ffdf8a, #c18d36);
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .account-controls__name {
@@ -349,15 +369,16 @@ h1 strong::after { content: ''; position: absolute; height: 4px; width: 38%; rig
   white-space: nowrap;
   color: #ead9ad;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .account-controls__logout {
-  border: 1px solid rgba(213, 177, 105, 0.55);
+  min-height: 34px;
+  border: 1px solid rgba(213, 177, 105, .55);
   border-radius: 999px;
-  background: rgba(12, 27, 47, 0.88);
+  background: rgba(12, 27, 47, .88);
   color: #ead9ad;
-  padding: 9px 14px;
+  padding: 0 13px;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
@@ -365,34 +386,67 @@ h1 strong::after { content: ''; position: absolute; height: 4px; width: 38%; rig
 }
 
 .account-controls__logout:hover {
-  background: rgba(176, 137, 69, 0.22);
+  background: rgba(176, 137, 69, .22);
   border-color: #d5b169;
 }
 
-.account-controls--floating {
-  position: fixed;
-  top: 14px;
-  right: 14px;
-  padding: 9px 11px;
-  border: 1px solid rgba(213, 177, 105, 0.28);
-  border-radius: 14px;
-  background: rgba(7, 19, 35, 0.94);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, .25);
-  backdrop-filter: blur(12px);
+@media (max-width: 700px) {
+  .account-controls__name { max-width: 105px; }
+  .account-controls__logout { padding: 0 10px; }
 }
 
-@media (max-width: 700px) {
-  .account-controls__name {
-    max-width: 90px;
-  }
-  .account-controls__logout {
-    padding: 8px 10px;
-  }
-  .account-controls--floating {
-    top: 10px;
-    right: 10px;
+/* Account controls stay inside the existing page headers */
+.sp-owner-nav > .account-controls,
+.sh-nav > .account-controls {
+  margin-left: 10px;
+}
+
+.listing-header nav > .account-controls {
+  margin-left: 12px;
+}
+
+.st-header__right > .account-controls {
+  margin-left: 8px;
+}
+
+@media (max-width: 760px) {
+  .sp-owner-nav > .account-controls,
+  .sh-nav > .account-controls {
+    width: 100%;
+    max-width: 100%;
+    margin: 8px 0 0;
+    justify-content: space-between;
   }
 }
+
+@media (max-width: 600px) {
+  .listing-header {
+    height: auto;
+    min-height: 68px;
+    flex-wrap: wrap;
+    padding-block: 10px;
+    gap: 10px;
+  }
+
+  .listing-header nav {
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px 14px;
+  }
+
+  .listing-header nav > .account-controls {
+    flex: 1 0 100%;
+    margin: 7px 0 0;
+    justify-content: space-between;
+  }
+
+  .st-header__right > .account-controls {
+    margin-left: 0;
+  }
+}
+
 
 /* SPACEHUNT mobile home header refinement */
 @media (max-width: 760px) {
@@ -489,27 +543,3 @@ h1 strong::after { content: ''; position: absolute; height: 4px; width: 38%; rig
   .mobile-account-controls .account-controls__logout { min-height: 42px; padding: 0 16px; }
 }
 
-/* SPACEHUNT FIX: Keep header and account controls stable while scrolling */
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.account-controls--floating {
-  position: fixed !important;
-  top: max(14px, env(safe-area-inset-top)) !important;
-  right: 14px !important;
-  z-index: 99999 !important;
-  width: max-content;
-  max-width: calc(100vw - 28px);
-  box-sizing: border-box;
-}
-
-@media (max-width: 760px) {
-  .account-controls--floating {
-    top: max(10px, env(safe-area-inset-top)) !important;
-    right: 10px !important;
-  }
-}
