@@ -488,3 +488,28 @@ h1 strong::after { content: ''; position: absolute; height: 4px; width: 38%; rig
   .mobile-account-controls .account-controls__name { max-width: 55%; font-size: 13px; }
   .mobile-account-controls .account-controls__logout { min-height: 42px; padding: 0 16px; }
 }
+
+/* SPACEHUNT FIX: Keep header and account controls stable while scrolling */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.account-controls--floating {
+  position: fixed !important;
+  top: max(14px, env(safe-area-inset-top)) !important;
+  right: 14px !important;
+  z-index: 99999 !important;
+  width: max-content;
+  max-width: calc(100vw - 28px);
+  box-sizing: border-box;
+}
+
+@media (max-width: 760px) {
+  .account-controls--floating {
+    top: max(10px, env(safe-area-inset-top)) !important;
+    right: 10px !important;
+  }
+}
