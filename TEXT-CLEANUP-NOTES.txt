@@ -1,0 +1,21 @@
+SPACEHUNT TEXT CLEANUP PATCH
+
+Replace the matching files under your existing project:
+  src/main.jsx
+  src/ExploreSpaces.jsx
+  src/ListingPage.jsx
+  src/OwnerPage.jsx
+  src/LoginPage.jsx
+  src/CategoryPage.jsx
+
+This patch contains only source files. It does not include .env.local, node_modules, dist, or other project secrets/build artifacts.
+
+Copy and content changes:
+- Removed repeated slogans, generic card descriptions, decorative labels, and duplicate footer/CTA copy.
+- Shortened helper text on listing and owner forms.
+- Removed placeholder roadmap copy from the unused category component.
+- Corrected owner submission messaging: successful Supabase submission is labelled as sent for review, not as a local draft.
+- Changed the owner button to “Submit for review”.
+- Kept useful search instructions, required-field guidance, review status, and photo-upload limitation notices.
+
+No CSS or route logic was intentionally changed.

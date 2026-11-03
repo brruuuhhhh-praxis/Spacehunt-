@@ -1,0 +1,23 @@
+# Dependencies and build
+node_modules/
+dist/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Backups
+.spacehunt-backups/
+backup-*/
+*.backup
+index.backup.htm
+
+# Local and system files
+.DS_Store
+*.log
+
+# Source backup files
+*.backup*
+*.before-*
+*.bak
